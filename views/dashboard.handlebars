@@ -1,0 +1,19 @@
+<button class="newPostBtn">Create a new post</button>
+
+<section>
+    <h2>Your dashboard</h2>
+
+    {{#if posts.length}}
+        <ul class="postList">
+            {{#each posts as |post|}}
+            <li>
+                {{> post-info post}}
+                <a href="/dashboard/edit/{{post.id}}" class="edit">edit post</a>
+            </li>
+            {{/each}}
+        </ul>
+        {{/if}}
+</section>
+
+
+<script src="/js/dashboard.js"></script>
