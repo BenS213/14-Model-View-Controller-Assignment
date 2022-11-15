@@ -9,6 +9,7 @@
     "dev": "nodemon server.js",
     "start": "node server.js"
   },
+  "homepage": "https://github.com/BenS213/14-Model-View-Controller-Assignment#readme",
   "author": "",
   "license": "ISC",
   "dependencies": {
