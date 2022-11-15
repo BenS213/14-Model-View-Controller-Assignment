@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
     include: [
       {
         model: Comment,
-        attributes: ["id", "content", "post_id", "user_id", "created_at"],
+        attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
         include: {
           model: User,
           attributes: ["username"],
@@ -46,7 +46,7 @@ router.get('/post/:id', (req, res) => {
     ],
     include: [{
         model: Comment, 
-        attributes: ['id', 'content', 'post_id', 'user_id', 'created_at'],
+        attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
         include: {
             model: User,
             attributes: ['username']
@@ -59,16 +59,16 @@ router.get('/post/:id', (req, res) => {
 ]
  })
  .then(dbPostData => {
-    if(!dbPostData) {
-        res.status(404).json({
-            message: 'No Post with that id'
-        });
-        return;
-    }
-    const post = dbPostData.get({
-        plain: true
-    });
- })
+  if (!dbPostData) {
+      res.status(404).json({ message: 'No post found with this id' });
+      return;
+  }
+  const post = dbPostData.get({ plain: true });
+  console.log(post);
+  res.render('single-post', { post, loggedIn: req.session.loggedIn });
+
+
+})
  .catch(err => {
     console.log(err);
     res.status(500).json(err)
@@ -91,8 +91,6 @@ router.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-router.get('*', (req, res) => {
-    res.status(404).send("Cannot go")
-});
+
 
 module.exports = router;

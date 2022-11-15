@@ -8,6 +8,4 @@ router.use('/dashboard', dashboardRoutes);
 router.use('/api', apiRoutes);
 router.use('/', homeRoutes);
 
-
-
 module.exports = router;
